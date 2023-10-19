@@ -24,16 +24,15 @@ public static class LineIntersector
 
         return (val > 0) ? 1 : 2; // clock or counterclock wise
     }
-
     static public bool intersectionPoint(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, out Vector2 intersection){
         //Based on https://encyclopedia.pub/entry/32060#:~:text=Two%20Lines&text=one%20gets%2C%20from%20Cramer's%20rule,2%20%E2%88%92%20a%202%20b%201%20.
-
+        //https://handwiki.org/wiki/Intersection_(Euclidean_geometry)
+        
         intersection = new Vector2();
 
         float a1 = p2.x - p1.x;
         float b1 = p4.x - p3.x;
         float c1 = p3.x - p1.x;
-
         float a2 = p2.y - p1.y;
         float b2 = p4.y - p3.y;
         float c2 = p3.y - p1.y;
@@ -44,19 +43,13 @@ public static class LineIntersector
         float xS = (c1 * b2 - c2 * b1) / det;
         float yS = -(a1 * c2 - a2 * c1) / det;
 
-        Debug.Log("xS: " + (p1 + xS * (p2 - p1)) + " " + xS);
-        Debug.Log("yS: " + (p3 + yS * (p4 - p3)) + " " + yS);
-
-        if(xS >= 0 && xS <= 1 && yS >= 0 && yS <= 1)
-        {
+        if(xS >= 0 && xS <= 1 && yS >= 0 && yS <= 1){
             intersection = p1 + xS * (p2 - p1);
             return true;
         }
             
-
         return false;
     }
-
     static public bool intersectionPoint(Vector3 p1, Vector3 q1, Vector3 p2, Vector3 q2)
     {
 
